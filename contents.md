@@ -63,7 +63,7 @@ The default experiment is a finite answer policy or a tiny character model. Appe
 | $\gamma,\lambda$ | Discount and GAE trace parameter |
 | $\beta$ | KL regularization coefficient unless a local definition says otherwise |
 | $\rho_t$ | Current/behavior action-probability ratio |
-| $\operatorname{sg}(\cdot)$ | Stop gradient: treat an estimated quantity as fixed during this update |
+| $\text{sg}(\cdot)$ | Stop gradient: treat an estimated quantity as fixed during this update |
 
 Unless stated otherwise, expectations and logarithms use natural logarithms, prompts are sampled independently of policy parameters, and finite-horizon text tasks use $\gamma=1$. For infinite-horizon statements, $0\leq\gamma<1$. A positive objective $J$ is maximized; a loss $L$ is minimized.
 
@@ -483,7 +483,7 @@ J_{\mathrm{clip}}(\theta)=
 \mathbb E_{\mathrm{old}}\left[
 \min\left(
 \rho_t\hat A_t,
-\operatorname{clip}(\rho_t,1-\epsilon,1+\epsilon)\hat A_t
+\text{clip}(\rho_t,1-\epsilon,1+\epsilon)\hat A_t
 \right)\right],
 \quad
 \rho_t=\frac{\pi_\theta(a_t\mid s_t)}
@@ -565,16 +565,16 @@ A random variable maps outcomes to numbers. Conditional expectation $\mathbb E[Y
 $$
 \mathbb E[Y]=\mathbb E[\mathbb E[Y\mid X]],
 \qquad
-\operatorname{Var}(Y)=
-\mathbb E[\operatorname{Var}(Y\mid X)]
-+\operatorname{Var}(\mathbb E[Y\mid X])
+\text{Var}(Y)=
+\mathbb E[\text{Var}(Y\mid X)]
++\text{Var}(\mathbb E[Y\mid X])
 $$
 
 separate within-prompt and across-prompt variation. Sampling more responses per prompt reduces one source of uncertainty while sampling more prompts addresses the other.
 
 Covariance measures joint variation:
-$\operatorname{Cov}(X,Y)=\mathbb E[(X-\mathbb EX)(Y-\mathbb EY)]$.
-Subtracting a correlated control variate can reduce variance. For $X-c(Z-\mathbb EZ)$, the variance-minimizing scalar coefficient is $\operatorname{Cov}(X,Z)/\operatorname{Var}(Z)$, when the denominator is positive.
+$\text{Cov}(X,Y)=\mathbb E[(X-\mathbb EX)(Y-\mathbb EY)]$.
+Subtracting a correlated control variate can reduce variance. For $X-c(Z-\mathbb EZ)$, the variance-minimizing scalar coefficient is $\text{Cov}(X,Z)/\text{Var}(Z)$, when the denominator is positive.
 
 An estimator's bias is $\mathbb E\hat\theta-\theta$; its mean squared error is variance plus squared bias. Consistency means convergence to the target as sample size grows, not unbiasedness at every finite size. For independent samples with finite variance, the standard error of their mean is $s/\sqrt n$.
 
@@ -663,8 +663,8 @@ A tokenizer maps text to token IDs. The same visible string can acquire differen
 A transformer turns token and position representations into hidden vectors using attention and feed-forward layers. In causal attention, position $t$ can access positions up to $t$, but not future positions. For queries, keys, and values,
 
 $$
-\operatorname{Attention}(Q,K,V)
-=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right)V,
+\text{Attention}(Q,K,V)
+=\text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right)V,
 $$
 
 where forbidden entries of $M$ are negative infinity. A padding mask is a separate concept: it excludes positions that are not real content.
@@ -1261,7 +1261,7 @@ $$
 The actor minimizes minus the clipped surrogate. A simple critic loss is
 
 $$
-L_V=\frac{1}{2}\operatorname{maskedmean}
+L_V=\frac{1}{2}\text{maskedmean}
 \left[(V_\phi(h_t)-\hat G_t)^2\right].
 $$
 
@@ -1642,7 +1642,7 @@ J=
 \frac1G\sum_i\frac1{T_i}\sum_t
 \left[
 \min\{\rho_{it}\hat A_i,
-\operatorname{clip}(\rho_{it},1-\epsilon,1+\epsilon)\hat A_i\}
+\text{clip}(\rho_{it},1-\epsilon,1+\epsilon)\hat A_i\}
 -\beta\hat k_{it}
 \right].
 $$
@@ -2613,7 +2613,7 @@ Accuracy measures the fraction of correct tasks under a defined sampling and dec
 Pass@k estimates the probability that at least one of $k$ generated samples is correct. If a task has $n$ sampled candidates with $c$ successes and $n\geq k$, the familiar estimator is
 
 $$
-\widehat{\operatorname{pass@k}}
+\widehat{\text{pass@k}}
 =1-\frac{\binom{n-c}{k}}{\binom nk}.
 $$
 
