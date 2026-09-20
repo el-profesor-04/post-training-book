@@ -216,9 +216,9 @@ The reward is not the gradient. The gradient also depends on the probability mod
 An autoregressive model assigns probability
 
 $$
-\pi_\theta(y\mid x)=\prod_{t=1}^{T}\pi_\theta(y_t\mid x,y_{<t}),
+\pi_\theta(y \mid x) = \prod_{t=1}^{T} \pi_\theta(y_t \mid x, y_{< t}),
 \qquad
-\log\pi_\theta(y\mid x)=\sum_{t=1}^{T}\log\pi_\theta(y_t\mid h_t).
+\log \pi_\theta(y \mid x) = \sum_{t=1}^{T} \log \pi_\theta(y_t \mid x, y_{< t})
 $$
 
 This follows from the probability chain rule; it does not assert that tokens are independent. The history includes all earlier tokens. Include the end-of-sequence event when comparing probabilities of complete variable-length responses. Otherwise the score describes a prefix.
