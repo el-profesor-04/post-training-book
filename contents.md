@@ -74,7 +74,7 @@ J_\beta(\theta)=
 \mathbb E_{x\sim D}
 \left[
 \mathbb E_{y\sim\pi_\theta(\cdot\mid x)}R(x,y)
--\beta D_{\mathrm{KL}}\!\left(
+-\beta D_{\mathrm{KL}}\left(
 \pi_\theta(\cdot\mid x)\,\|\,\pi_{\mathrm{ref}}(\cdot\mid x)
 \right)
 \right].
